@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getOverallPopularity, type Song } from "./api/songApi";
 import ButtonContainer from "./components/layout/button-container";
+import StyledImgContainer from "./components/layout/circle-image";
 import ContentContainer from "./components/layout/contentcontainer";
 import { GlobalStyles } from "./components/layout/globalstyles";
 import StyledSection from "./components/layout/stylecsection";
@@ -38,21 +39,36 @@ export default function App() {
         <StyledSection>
           <>
             <ContentContainer>
-              <SongCircles></SongCircles>
+              <SongCircles>
+                <StyledImgContainer
+                  src={songs[0]?.album_image}
+                  alt={songs[0]?.name}
+                />
+              </SongCircles>
               <StyledPContainer>
                 {songs[0]?.name}
                 <br></br> {songs[0]?.artist_name}
               </StyledPContainer>
             </ContentContainer>
             <ContentContainer>
-              <SongCircles></SongCircles>
+              <SongCircles>
+                <StyledImgContainer
+                  src={songs[1]?.album_image}
+                  alt={songs[1]?.name}
+                />
+              </SongCircles>
               <StyledPContainer>
                 {songs[1]?.name}
                 <br></br> {songs[1]?.artist_name}
               </StyledPContainer>
             </ContentContainer>
             <ContentContainer>
-              <SongCircles></SongCircles>
+              <SongCircles>
+                <StyledImgContainer
+                  src={songs[2]?.album_image}
+                  alt={songs[2]?.name}
+                />
+              </SongCircles>
               <StyledPContainer>
                 {songs[2]?.name}
                 <br></br> {songs[2]?.artist_name}
@@ -63,7 +79,12 @@ export default function App() {
         <StyledSection>
           <ContentContainer>
             <StyledPContainer>{songs[0]?.name}</StyledPContainer>
-            <SongCircles></SongCircles>
+            <SongCircles>
+              <StyledImgContainer
+                src={songs[0]?.album_image}
+                alt={songs[0]?.name}
+              />
+            </SongCircles>
           </ContentContainer>
         </StyledSection>
       </ContentContainer>
