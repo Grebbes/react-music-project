@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getOverallPopularity, type Song } from "./api/songApi";
 import ButtonContainer from "./components/layout/button-container";
 import StyledImgContainer from "./components/layout/circle-image";
@@ -12,6 +12,17 @@ import StyledButton from "./components/ui/styled-button";
 
 export default function App() {
   const [songs, setSongs] = useState<Song[]>([]);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+
+  const playSong = (song: Song) => {
+    if (currentlyPlaying === song.id) return;
+    if (audioRef.current) {
+      audioRef.current.src = song.audio;
+      audioRef.current.play();
+      setCurrentlyPlaying(song.id);
+    }
+  };
 
   useEffect(() => {
     async function fetchOverallSongs() {
@@ -43,6 +54,7 @@ export default function App() {
                 <StyledImgContainer
                   src={songs[0]?.album_image}
                   alt={songs[0]?.name}
+                  onClick={() => playSong(songs[0])}
                 />
               </SongCircles>
               <StyledPContainer>
@@ -55,6 +67,7 @@ export default function App() {
                 <StyledImgContainer
                   src={songs[1]?.album_image}
                   alt={songs[1]?.name}
+                  onClick={() => playSong(songs[1])}
                 />
               </SongCircles>
               <StyledPContainer>
@@ -67,6 +80,7 @@ export default function App() {
                 <StyledImgContainer
                   src={songs[2]?.album_image}
                   alt={songs[2]?.name}
+                  onClick={() => playSong(songs[2])}
                 />
               </SongCircles>
               <StyledPContainer>
@@ -83,8 +97,14 @@ export default function App() {
               <StyledImgContainer
                 src={songs[0]?.album_image}
                 alt={songs[0]?.name}
+                onClick={() => playSong(songs[0])}
               />
             </SongCircles>
+            <audio
+              ref={audioRef}
+              controls
+              style={{ display: currentlyPlaying ? "block" : "none" }}
+            ></audio>
           </ContentContainer>
         </StyledSection>
       </ContentContainer>

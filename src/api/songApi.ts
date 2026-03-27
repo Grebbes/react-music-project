@@ -10,6 +10,7 @@ export interface Song {
   name: string;
   artist_name: string;
   album_image: string;
+  audio: string;
 }
 
 export async function getOverallPopularity() {
