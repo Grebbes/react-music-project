@@ -7,6 +7,7 @@ import { GlobalStyles } from "./components/layout/globalstyles";
 import StyledSection from "./components/layout/stylecsection";
 import StyledPContainer from "./components/layout/styled-p-container";
 import StyledMain from "./components/layout/styledmain";
+import AudioDisplay from "./components/ui/audio-display";
 import SongCircles from "./components/ui/songcircle";
 import StyledButton from "./components/ui/styled-button";
 
@@ -100,11 +101,11 @@ export default function App() {
                 onClick={() => playSong(songs[0])}
               />
             </SongCircles>
-            <audio
+            <AudioDisplay
               ref={audioRef}
               controls
               style={{ display: currentlyPlaying ? "block" : "none" }}
-            ></audio>
+            ></AudioDisplay>
           </ContentContainer>
         </StyledSection>
       </ContentContainer>
