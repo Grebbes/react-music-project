@@ -10,6 +10,7 @@ const SongCircles = styled.div`
   width: 150px;
   overflow: hidden;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export default SongCircles;

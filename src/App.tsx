@@ -8,6 +8,7 @@ import StyledSection from "./components/layout/stylecsection";
 import StyledPContainer from "./components/layout/styled-p-container";
 import StyledMain from "./components/layout/styledmain";
 import AudioDisplay from "./components/ui/audio-display";
+import NoSongDiv from "./components/ui/no-song-div";
 import SongCircles from "./components/ui/songcircle";
 import StyledButton from "./components/ui/styled-button";
 
@@ -24,6 +25,12 @@ export default function App() {
       setCurrentlyPlaying(song.id);
     }
   };
+
+  const audioImage = songs.find(
+    (song) => song.id === currentlyPlaying,
+  )?.album_image;
+
+  const audioTitle = songs.find((song) => song.id === currentlyPlaying)?.name;
 
   useEffect(() => {
     async function fetchOverallSongs() {
@@ -93,14 +100,22 @@ export default function App() {
         </StyledSection>
         <StyledSection>
           <ContentContainer>
-            <StyledPContainer>{songs[0]?.name}</StyledPContainer>
-            <SongCircles>
-              <StyledImgContainer
-                src={songs[0]?.album_image}
-                alt={songs[0]?.name}
-                onClick={() => playSong(songs[0])}
-              />
-            </SongCircles>
+            {currentlyPlaying ? (
+              <>
+                <StyledPContainer>{audioTitle}</StyledPContainer>
+                <SongCircles>
+                  <StyledImgContainer src={audioImage} />
+                </SongCircles>
+              </>
+            ) : (
+              <>
+                <StyledPContainer>No song currently playing</StyledPContainer>
+                <SongCircles>
+                  <NoSongDiv>Click a song above to start playing</NoSongDiv>
+                </SongCircles>
+              </>
+            )}
+
             <AudioDisplay
               ref={audioRef}
               controls
