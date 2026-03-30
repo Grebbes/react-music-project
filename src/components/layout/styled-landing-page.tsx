@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
-const StyledMain = styled.main`
+const StyledLandingPage = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  text-align: center;
+  height: 100vh;
+  gap: 20px;
   background: #5211d4;
   background: radial-gradient(
     circle,
     rgba(82, 17, 212, 1) 0%,
     rgba(0, 0, 0, 1) 84%
   );
-  height: 100vh;
-  overflow: auto;
 `;
 
-export default StyledMain;
+export default StyledLandingPage;

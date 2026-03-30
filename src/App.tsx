@@ -6,10 +6,12 @@ import {
   getWeeklyPopularity,
   type Song,
 } from "./api/songApi";
+import playerImage from "./assets/player.png";
 import ButtonContainer from "./components/layout/button-container";
 import StyledImgContainer from "./components/layout/circle-image";
 import ContentContainer from "./components/layout/contentcontainer";
 import { GlobalStyles } from "./components/layout/globalstyles";
+import IconCircle from "./components/layout/icon-circle";
 import StyledSection from "./components/layout/stylecsection";
 import StyledH2 from "./components/layout/styled-h2";
 import StyledPContainer from "./components/layout/styled-p-container";
@@ -70,6 +72,11 @@ export default function App({ timeframe }: AppProps) {
     <StyledMain>
       <GlobalStyles></GlobalStyles>
       <ContentContainer>
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <IconCircle>
+            <StyledImgContainer src={playerImage} alt="Music Player" />
+          </IconCircle>
+        </div>
         <h1
           style={{
             color: "whitesmoke",
@@ -157,7 +164,7 @@ export default function App({ timeframe }: AppProps) {
                     textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
                   }}
                 >
-                  <h3>No song currently playing</h3>
+                  <h3>Ready to Play</h3>
                   <p>Click a song above to start playing</p>
                 </div>
               </>
