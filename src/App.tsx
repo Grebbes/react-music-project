@@ -15,7 +15,6 @@ import StyledH2 from "./components/layout/styled-h2";
 import StyledPContainer from "./components/layout/styled-p-container";
 import StyledMain from "./components/layout/styledmain";
 import AudioDisplay from "./components/ui/audio-display";
-import NoSongDiv from "./components/ui/no-song-div";
 import SongCircles from "./components/ui/songcircle";
 import StyledButton from "./components/ui/styled-button";
 
@@ -71,7 +70,14 @@ export default function App({ timeframe }: AppProps) {
     <StyledMain>
       <GlobalStyles></GlobalStyles>
       <ContentContainer>
-        <h1>Top Songs from Jamedon</h1>
+        <h1
+          style={{
+            color: "whitesmoke",
+            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          Top Songs from Jamedon
+        </h1>
         <ButtonContainer>
           <Link to="/weekly">
             <StyledButton>Week</StyledButton>
@@ -144,10 +150,16 @@ export default function App({ timeframe }: AppProps) {
               </>
             ) : (
               <>
-                <StyledPContainer>No song currently playing</StyledPContainer>
-                <SongCircles>
-                  <NoSongDiv>Click a song above to start playing</NoSongDiv>
-                </SongCircles>
+                <div
+                  style={{
+                    textAlign: "center",
+                    color: "whitesmoke",
+                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+                  }}
+                >
+                  <h3>No song currently playing</h3>
+                  <p>Click a song above to start playing</p>
+                </div>
               </>
             )}
 

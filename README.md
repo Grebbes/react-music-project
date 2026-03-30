@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# React Musikstatistik App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+En React TypeScript-applikation som visar populära låtar och musikstatistik baserat på olika tidsramar (veckovis, månadsvis och totalt).
 
-Currently, two official plugins are available:
+## 📖 Projektbeskrivning
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Denna applikation låter användare utforska musikstatistik genom ett interaktivt gränssnitt. Användare kan:
 
-## React Compiler
+- Visa populära låtar för olika tidsperioder (veckovis, månadsvis, totalt)
+- Lyssna på låtarna direkt i applikationen
+- Navigera mellan olika vyer med React Router
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Teknikstack
 
-## Expanding the ESLint configuration
+- **React** 19.2.4 - UI-bibliotek
+- **TypeScript** - Typsäkerhet
+- **Vite** - Byggsystem och utvecklingsserver
+- **React Router** - Navigation
+- **Styled Components** - CSS-in-JS styling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Hur man kör projektet
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Förutsättningar
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Se till att du har följande installerat:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (version 18 eller senare)
+- npm eller yarn
+
+### Installation
+
+1. Klona eller ladda ner projektet
+2. Navigera till projektmappen:
+
+   ```bash
+   cd react-inl
+   ```
+
+3. Installera beroenden:
+   ```bash
+   npm install
+   ```
+
+### Utvecklingsläge
+
+Starta utvecklingsservern:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Applikationen öppnas automatiskt i din webbläsare på `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🎵 Funktioner
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Ljuduppspelning av låtar
+- Dynamisk laddning av musikdata
+- Modern och ren användargränssnitt
+- Typesäker utveckling med TypeScript
+
+## ✅ Kravspecifikation
+
+### Krav för godkänt:
+
+- [x] **Komponenter:** Projektet innehåller och använder minst 6 stycken komponenter varav minst 2 stycken är "statefulla"-komponenter
+
+- [x] **React Router:** React Router har använts för att dynamiskt uppdatera URL'en
+
+- [ ] **Git & GitHub:** Git & GitHub har använts
+  - _Behöver verifieras att projektet är versionshanterat_
+
+- [x] **README.md:** Projektmappen innehåller en README.md fil
+
+### Krav för väl godkänt:
+
+- [ ] **Alla godkänt-punkter:** Alla punkter för godkänt är uppfyllda
+
+- [x] **CSS i JS:** Ett "CSS i JS" lib skall användas för att skriva CSS (ex JSS, Styled-Components, mm)
+
+- [x] **Web-API:** Data från ett web-API hämtas och visas på sidan
+
+---

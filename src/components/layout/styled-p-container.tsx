@@ -9,5 +9,7 @@ const StyledPContainer = styled.p`
   text-align: center;
   text-overflow: ellipsis;
   max-width: 150px;
+  color: whitesmoke;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 `;
 export default StyledPContainer;
