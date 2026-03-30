@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { getOverallPopularity, type Song } from "./api/songApi";
+import { Link } from "react-router";
+import {
+  getMonthlyPopularity,
+  getOverallPopularity,
+  getWeeklyPopularity,
+  type Song,
+} from "./api/songApi";
 import ButtonContainer from "./components/layout/button-container";
 import StyledImgContainer from "./components/layout/circle-image";
 import ContentContainer from "./components/layout/contentcontainer";
 import { GlobalStyles } from "./components/layout/globalstyles";
 import StyledSection from "./components/layout/stylecsection";
+import StyledH2 from "./components/layout/styled-h2";
 import StyledPContainer from "./components/layout/styled-p-container";
 import StyledMain from "./components/layout/styledmain";
 import AudioDisplay from "./components/ui/audio-display";
@@ -12,7 +19,12 @@ import NoSongDiv from "./components/ui/no-song-div";
 import SongCircles from "./components/ui/songcircle";
 import StyledButton from "./components/ui/styled-button";
 
-export default function App() {
+type Timeframe = "overall" | "monthly" | "weekly";
+type AppProps = {
+  timeframe: Timeframe;
+};
+
+export default function App({ timeframe }: AppProps) {
   const [songs, setSongs] = useState<Song[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
@@ -33,17 +45,27 @@ export default function App() {
   const audioTitle = songs.find((song) => song.id === currentlyPlaying)?.name;
 
   useEffect(() => {
-    async function fetchOverallSongs() {
+    async function fetchSongs() {
       try {
-        const overallSongs = await getOverallPopularity();
-        setSongs(overallSongs);
+        let songData: Song[];
+        switch (timeframe) {
+          case "monthly":
+            songData = await getMonthlyPopularity();
+            break;
+          case "weekly":
+            songData = await getWeeklyPopularity();
+            break;
+          default:
+            songData = await getOverallPopularity();
+        }
+        setSongs(songData);
       } catch (error) {
         console.error("error fetching songs:", error);
       }
     }
 
-    fetchOverallSongs();
-  }, []);
+    fetchSongs();
+  }, [timeframe]);
 
   return (
     <StyledMain>
@@ -51,10 +73,23 @@ export default function App() {
       <ContentContainer>
         <h1>Top Songs from Jamedon</h1>
         <ButtonContainer>
-          <StyledButton>week</StyledButton>
-          <StyledButton>month</StyledButton>
-          <StyledButton>year</StyledButton>
+          <Link to="/weekly">
+            <StyledButton>Week</StyledButton>
+          </Link>
+          <Link to="/monthly">
+            <StyledButton>Month</StyledButton>
+          </Link>
+          <Link to="/overall">
+            <StyledButton>Overall</StyledButton>
+          </Link>
         </ButtonContainer>
+        <StyledH2>
+          {timeframe === "overall"
+            ? "Overall Popularity"
+            : timeframe === "monthly"
+              ? "Monthly Popularity"
+              : "Weekly Popularity"}
+        </StyledH2>
         <StyledSection>
           <>
             <ContentContainer>
