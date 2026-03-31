@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
 import {
   getMonthlyPopularity,
   getOverallPopularity,
@@ -19,6 +18,7 @@ import StyledMain from "./components/layout/styledmain";
 import AudioDisplay from "./components/ui/audio-display";
 import SongCircles from "./components/ui/songcircle";
 import StyledButton from "./components/ui/styled-button";
+import StyledNavLink from "./components/ui/styled-nav-link";
 
 type Timeframe = "overall" | "monthly" | "weekly";
 type AppProps = {
@@ -89,15 +89,15 @@ export default function App({ timeframe }: AppProps) {
           Top Songs from Jamedon
         </h1>
         <ButtonContainer>
-          <Link to="/weekly">
+          <StyledNavLink to="/weekly">
             <StyledButton>Week</StyledButton>
-          </Link>
-          <Link to="/monthly">
+          </StyledNavLink>
+          <StyledNavLink to="/monthly">
             <StyledButton>Month</StyledButton>
-          </Link>
-          <Link to="/overall">
+          </StyledNavLink>
+          <StyledNavLink to="/overall">
             <StyledButton>Overall</StyledButton>
-          </Link>
+          </StyledNavLink>
         </ButtonContainer>
         <StyledH2>
           {timeframe === "overall"
