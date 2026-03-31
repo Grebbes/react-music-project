@@ -6,7 +6,8 @@ const StyledH2 = styled.h2`
   margin-bottom: 10px;
   text-align: center;
   color: whitesmoke;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
 `;
 
 export default StyledH2;

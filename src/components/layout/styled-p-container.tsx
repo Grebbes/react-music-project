@@ -10,6 +10,6 @@ const StyledPContainer = styled.p`
   text-overflow: ellipsis;
   max-width: 150px;
   color: whitesmoke;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 `;
 export default StyledPContainer;

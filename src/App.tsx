@@ -28,7 +28,7 @@ type AppProps = {
 export default function App({ timeframe }: AppProps) {
   const [songs, setSongs] = useState<Song[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<string>();
 
   const playSong = (song: Song) => {
     if (currentlyPlaying === song.id) return;
@@ -79,8 +79,11 @@ export default function App({ timeframe }: AppProps) {
         </div>
         <h1
           style={{
-            color: "whitesmoke",
-            textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+            color: "white",
+            textShadow: "2px 2px 6px rgba(0, 0, 0, 0.7)",
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            marginBottom: "1.5rem",
           }}
         >
           Top Songs from Jamedon
