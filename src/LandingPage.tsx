@@ -18,6 +18,7 @@ export default function LandingPage() {
           color: "whitesmoke",
           textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
           marginTop: "100px",
+          marginBottom: "50px",
         }}
       >
         Welcome, <br></br>View The top songs of Jamedon
