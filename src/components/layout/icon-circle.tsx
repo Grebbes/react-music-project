@@ -12,7 +12,7 @@ const IconCircle = styled.div`
   overflow: hidden;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 10px 10px #000000af;
+  box-shadow: 0 7px 7px #000000af;
 `;
 
 export default IconCircle;

@@ -14,10 +14,10 @@ const StyledButton = styled.button`
 
   &:hover {
     background: #ffffff;
-    color: #4c0db8;
+    color: rgba(148, 187, 233, 1);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    border-color: #5211d4;
+    border-color: rgba(148, 187, 233, 1);
   }
 `;
 

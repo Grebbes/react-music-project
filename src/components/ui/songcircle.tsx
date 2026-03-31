@@ -12,6 +12,11 @@ const SongCircles = styled.div`
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 10px 10px #000000af;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 export default SongCircles;
