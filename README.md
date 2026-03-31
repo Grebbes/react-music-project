@@ -66,7 +66,7 @@ Applikationen öppnas automatiskt i din webbläsare på `http://localhost:5173`
 
 - [x] **React Router:** React Router har använts för att dynamiskt uppdatera URL'en
 
-- [ ] **Git & GitHub:** Git & GitHub har använts
+- [x] **Git & GitHub:** Git & GitHub har använts
   - _Behöver verifieras att projektet är versionshanterat_
 
 - [x] **README.md:** Projektmappen innehåller en README.md fil
