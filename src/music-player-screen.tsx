@@ -33,13 +33,18 @@ export default function MusicPlayerScreen() {
   }>();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [songs, setSongs] = useState<Song[]>([]);
-  const audioTitle = songs.find((song) => song.id === songid)?.name;
-  const artistName = songs.find((song) => song.id === songid)?.artist_name;
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string>();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const audioImage = songs.find((song) => song.id === songid)?.album_image;
+  const currentDisplaySong = currentlyPlaying || songid;
+  const audioTitle = songs.find((song) => song.id === currentDisplaySong)?.name;
+  const artistName = songs.find(
+    (song) => song.id === currentDisplaySong,
+  )?.artist_name;
+  const audioImage = songs.find(
+    (song) => song.id === currentDisplaySong,
+  )?.album_image;
 
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
@@ -129,6 +134,9 @@ export default function MusicPlayerScreen() {
     async function autoplaySong() {
       if (!songs.length || !songid || !audioRef.current) return;
 
+      // Only autoplay if nothing is currently playing
+      if (currentlyPlaying) return;
+
       const currentSong = songs.find((song) => song.id === songid);
       if (!currentSong) return;
 
@@ -136,7 +144,7 @@ export default function MusicPlayerScreen() {
     }
 
     autoplaySong();
-  }, [songs, songid, playSong]);
+  }, [songs, songid, playSong, currentlyPlaying]);
 
   useEffect(() => {
     const audioElement = audioRef.current;
@@ -150,6 +158,45 @@ export default function MusicPlayerScreen() {
       }
     };
   }, [handleLoadedMetadata, handleTimeUpdate]);
+
+  const getNextSong = useCallback(() => {
+    const currentIndex = songs.findIndex(
+      (song) => song.id === currentlyPlaying,
+    );
+
+    if (currentIndex === -1) return null;
+
+    const nextIndex = currentIndex === songs.length - 1 ? 0 : currentIndex + 1;
+
+    return songs[nextIndex];
+  }, [songs, currentlyPlaying]);
+
+  const getPreviousSong = useCallback(() => {
+    const currentIndex = songs.findIndex(
+      (song) => song.id === currentlyPlaying,
+    );
+
+    if (currentIndex === -1) return null;
+
+    const previousIndex =
+      currentIndex === 0 ? songs.length - 1 : currentIndex - 1;
+
+    return songs[previousIndex];
+  }, [songs, currentlyPlaying]);
+
+  const handleNext = useCallback(() => {
+    const nextSong = getNextSong();
+    if (nextSong) {
+      playSong(nextSong);
+    }
+  }, [getNextSong, playSong]);
+
+  const handlePrevious = useCallback(() => {
+    const previousSong = getPreviousSong();
+    if (previousSong) {
+      playSong(previousSong);
+    }
+  }, [getPreviousSong, playSong]);
 
   return (
     <StyledLandingPage>
@@ -173,7 +220,7 @@ export default function MusicPlayerScreen() {
           onChange={handleSeek}
         ></MusicBar>
         <Controls>
-          <StyledControlls>
+          <StyledControlls onClick={handlePrevious}>
             <FontAwesomeIcon icon={faBackward} />
           </StyledControlls>
           <StyledControlls
@@ -184,7 +231,7 @@ export default function MusicPlayerScreen() {
           >
             <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
           </StyledControlls>
-          <StyledControlls>
+          <StyledControlls onClick={handleNext}>
             <FontAwesomeIcon icon={faForward} />
           </StyledControlls>
         </Controls>
