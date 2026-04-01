@@ -1,6 +1,7 @@
 import {
   faBackward,
   faForward,
+  faPause,
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,7 +36,12 @@ export default function MusicPlayerScreen() {
   const audioTitle = songs.find((song) => song.id === songid)?.name;
   const artistName = songs.find((song) => song.id === songid)?.artist_name;
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string>();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioImage = songs.find((song) => song.id === songid)?.album_image;
+
+  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   useEffect(() => {
     async function fetchSongs() {
@@ -60,16 +66,64 @@ export default function MusicPlayerScreen() {
     fetchSongs();
   }, [timeframe]);
 
+  const handleLoadedMetadata = useCallback(() => {
+    if (audioRef.current) {
+      setDuration(audioRef.current.duration);
+    }
+  }, []);
+
+  const handleTimeUpdate = useCallback(() => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+    }
+  }, []);
+
+  const handleSeek = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!audioRef.current || duration === 0) return;
+
+      const seekPercentage = parseFloat(e.target.value);
+      const seekTime = (seekPercentage / 100) * duration;
+
+      audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime);
+    },
+    [duration],
+  );
+
   const playSong = useCallback(
     (song: Song) => {
-      if (currentlyPlaying === song.id) return;
-      if (audioRef.current) {
+      if (!audioRef.current) return;
+
+      if (currentlyPlaying === song.id) {
+        if (audioRef.current.paused) {
+          audioRef.current.play();
+          setIsPlaying(true);
+        } else {
+          audioRef.current.pause();
+          setIsPlaying(false);
+        }
+      } else {
+        audioRef.current.removeEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata,
+        );
+        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+
         audioRef.current.src = song.audio;
+
+        audioRef.current.addEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata,
+        );
+        audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+
         audioRef.current.play();
         setCurrentlyPlaying(song.id);
+        setIsPlaying(true);
       }
     },
-    [currentlyPlaying],
+    [currentlyPlaying, handleLoadedMetadata, handleTimeUpdate],
   );
   useEffect(() => {
     async function autoplaySong() {
@@ -84,6 +138,19 @@ export default function MusicPlayerScreen() {
     autoplaySong();
   }, [songs, songid, playSong]);
 
+  useEffect(() => {
+    const audioElement = audioRef.current;
+    return () => {
+      if (audioElement) {
+        audioElement.removeEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata,
+        );
+        audioElement.removeEventListener("timeupdate", handleTimeUpdate);
+      }
+    };
+  }, [handleLoadedMetadata, handleTimeUpdate]);
+
   return (
     <StyledLandingPage>
       <GlobalStyles></GlobalStyles>
@@ -97,18 +164,25 @@ export default function MusicPlayerScreen() {
           <StyledImgContainer src={audioImage} />
         </SongCircles>
 
-        <AudioDisplay
-          ref={audioRef}
-          controls
-          style={{ display: currentlyPlaying ? "block" : "none" }}
-        ></AudioDisplay>
-        <MusicBar type="range" value={0}></MusicBar>
+        <AudioDisplay ref={audioRef} style={{ display: "none" }}></AudioDisplay>
+        <MusicBar
+          type="range"
+          value={progressPercentage}
+          min={0}
+          max={100}
+          onChange={handleSeek}
+        ></MusicBar>
         <Controls>
           <StyledControlls>
             <FontAwesomeIcon icon={faBackward} />
           </StyledControlls>
-          <StyledControlls>
-            <FontAwesomeIcon icon={faPlay} />
+          <StyledControlls
+            onClick={() => {
+              const currentSong = songs.find((song) => song.id === songid);
+              if (currentSong) playSong(currentSong);
+            }}
+          >
+            <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
           </StyledControlls>
           <StyledControlls>
             <FontAwesomeIcon icon={faForward} />
