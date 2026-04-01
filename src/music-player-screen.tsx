@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import {
   getMonthlyPopularity,
@@ -9,18 +9,22 @@ import {
 import StyledImgContainer from "./components/layout/circle-image";
 import ContentContainer from "./components/layout/contentcontainer";
 import { GlobalStyles } from "./components/layout/globalstyles";
+import StyledLandingPage from "./components/layout/styled-landing-page";
 import StyledPContainer from "./components/layout/styled-p-container";
-import StyledMain from "./components/layout/styledmain";
 import AudioDisplay from "./components/ui/audio-display";
 import SongCircles from "./components/ui/songcircle";
 
 type Timeframe = "overall" | "monthly" | "weekly";
 
 export default function MusicPlayerScreen() {
-  const { timeframe, songid } = useParams<{ timeframe: Timeframe }>();
+  const { timeframe, songid } = useParams<{
+    timeframe: Timeframe;
+    songid: string;
+  }>();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [songs, setSongs] = useState<Song[]>([]);
   const audioTitle = songs.find((song) => song.id === songid)?.name;
+  const artistName = songs.find((song) => song.id === songid)?.artist_name;
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string>();
   const audioImage = songs.find((song) => song.id === songid)?.album_image;
 
@@ -47,33 +51,39 @@ export default function MusicPlayerScreen() {
     fetchSongs();
   }, [timeframe]);
 
-  const playSong = (song: Song) => {
-    if (currentlyPlaying === song.id) return;
-    if (audioRef.current) {
-      audioRef.current.src = song.audio;
-      audioRef.current.play();
-      setCurrentlyPlaying(song.id);
-    }
-  };
+  const playSong = useCallback(
+    (song: Song) => {
+      if (currentlyPlaying === song.id) return;
+      if (audioRef.current) {
+        audioRef.current.src = song.audio;
+        audioRef.current.play();
+        setCurrentlyPlaying(song.id);
+      }
+    },
+    [currentlyPlaying],
+  );
   useEffect(() => {
     async function autoplaySong() {
       if (!songs.length || !songid || !audioRef.current) return;
 
       const currentSong = songs.find((song) => song.id === songid);
-
       if (!currentSong) return;
-      if (currentlyPlaying === currentSong.id) return;
 
       playSong(currentSong);
-      autoplaySong();
     }
-  }, [songs, songid]);
+
+    autoplaySong();
+  }, [songs, songid, playSong]);
 
   return (
-    <StyledMain>
+    <StyledLandingPage>
       <GlobalStyles></GlobalStyles>
       <ContentContainer>
-        <StyledPContainer>{audioTitle}</StyledPContainer>
+        <StyledPContainer>
+          {audioTitle}
+          <br />
+          {artistName}
+        </StyledPContainer>
         <SongCircles>
           <StyledImgContainer src={audioImage} />
         </SongCircles>
@@ -84,6 +94,6 @@ export default function MusicPlayerScreen() {
           style={{ display: currentlyPlaying ? "block" : "none" }}
         ></AudioDisplay>
       </ContentContainer>
-    </StyledMain>
+    </StyledLandingPage>
   );
 }

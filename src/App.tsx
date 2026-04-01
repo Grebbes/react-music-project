@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import {
   getMonthlyPopularity,
@@ -25,23 +25,6 @@ type Timeframe = "overall" | "monthly" | "weekly";
 export default function App() {
   const { timeframe } = useParams<{ timeframe: Timeframe }>();
   const [songs, setSongs] = useState<Song[]>([]);
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<string>();
-
-  const playSong = (song: Song) => {
-    if (currentlyPlaying === song.id) return;
-    if (audioRef.current) {
-      audioRef.current.src = song.audio;
-      audioRef.current.play();
-      setCurrentlyPlaying(song.id);
-    }
-  };
-
-  const audioImage = songs.find(
-    (song) => song.id === currentlyPlaying,
-  )?.album_image;
-
-  const audioTitle = songs.find((song) => song.id === currentlyPlaying)?.name;
 
   useEffect(() => {
     async function fetchSongs() {
@@ -112,7 +95,6 @@ export default function App() {
                   <StyledImgContainer
                     src={songs[0]?.album_image}
                     alt={songs[0]?.name}
-                    onClick={() => playSong(songs[0])}
                   />
                 </SongCircles>
               </Link>
@@ -127,7 +109,6 @@ export default function App() {
                   <StyledImgContainer
                     src={songs[1]?.album_image}
                     alt={songs[1]?.name}
-                    onClick={() => playSong(songs[1])}
                   />
                 </Link>
               </SongCircles>
@@ -142,7 +123,6 @@ export default function App() {
                   <StyledImgContainer
                     src={songs[2]?.album_image}
                     alt={songs[2]?.name}
-                    onClick={() => playSong(songs[2])}
                   />
                 </SongCircles>
               </Link>
@@ -155,27 +135,16 @@ export default function App() {
         </StyledSection>
         <StyledSection>
           <ContentContainer>
-            {currentlyPlaying ? (
-              <>
-                <StyledPContainer>{audioTitle}</StyledPContainer>
-                <SongCircles>
-                  <StyledImgContainer src={audioImage} />
-                </SongCircles>
-              </>
-            ) : (
-              <>
-                <div
-                  style={{
-                    textAlign: "center",
-                    color: "whitesmoke",
-                    textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
-                  }}
-                >
-                  <h3>Ready to Play</h3>
-                  <p>Click a song above to start playing</p>
-                </div>
-              </>
-            )}
+            <div
+              style={{
+                textAlign: "center",
+                color: "whitesmoke",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              <h3>Ready to Play</h3>
+              <p>Click a song above to start playing</p>
+            </div>
           </ContentContainer>
         </StyledSection>
       </ContentContainer>
