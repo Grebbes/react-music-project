@@ -1,3 +1,9 @@
+import {
+  faBackward,
+  faForward,
+  faPlay,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import {
@@ -12,7 +18,10 @@ import { GlobalStyles } from "./components/layout/globalstyles";
 import StyledLandingPage from "./components/layout/styled-landing-page";
 import StyledPContainer from "./components/layout/styled-p-container";
 import AudioDisplay from "./components/ui/audio-display";
+import Controls from "./components/ui/controls";
+import MusicBar from "./components/ui/progress-bar";
 import SongCircles from "./components/ui/songcircle";
+import StyledControlls from "./components/ui/styled-controls";
 
 type Timeframe = "overall" | "monthly" | "weekly";
 
@@ -93,6 +102,18 @@ export default function MusicPlayerScreen() {
           controls
           style={{ display: currentlyPlaying ? "block" : "none" }}
         ></AudioDisplay>
+        <MusicBar type="range" value={0}></MusicBar>
+        <Controls>
+          <StyledControlls>
+            <FontAwesomeIcon icon={faBackward} />
+          </StyledControlls>
+          <StyledControlls>
+            <FontAwesomeIcon icon={faPlay} />
+          </StyledControlls>
+          <StyledControlls>
+            <FontAwesomeIcon icon={faForward} />
+          </StyledControlls>
+        </Controls>
       </ContentContainer>
     </StyledLandingPage>
   );
