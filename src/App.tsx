@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link, useParams } from "react-router";
 import {
   getMonthlyPopularity,
   getOverallPopularity,
@@ -15,17 +16,14 @@ import StyledSection from "./components/layout/stylecsection";
 import StyledH2 from "./components/layout/styled-h2";
 import StyledPContainer from "./components/layout/styled-p-container";
 import StyledMain from "./components/layout/styledmain";
-import AudioDisplay from "./components/ui/audio-display";
 import SongCircles from "./components/ui/songcircle";
 import StyledButton from "./components/ui/styled-button";
 import StyledNavLink from "./components/ui/styled-nav-link";
 
 type Timeframe = "overall" | "monthly" | "weekly";
-type AppProps = {
-  timeframe: Timeframe;
-};
 
-export default function App({ timeframe }: AppProps) {
+export default function App() {
+  const { timeframe } = useParams<{ timeframe: Timeframe }>();
   const [songs, setSongs] = useState<Song[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string>();
@@ -89,14 +87,14 @@ export default function App({ timeframe }: AppProps) {
           Top Songs from Jamedon
         </h1>
         <ButtonContainer>
-          <StyledNavLink to="/weekly">
-            <StyledButton>Week</StyledButton>
+          <StyledNavLink to="/overall">
+            <StyledButton>Overall</StyledButton>
           </StyledNavLink>
           <StyledNavLink to="/monthly">
             <StyledButton>Month</StyledButton>
           </StyledNavLink>
-          <StyledNavLink to="/overall">
-            <StyledButton>Overall</StyledButton>
+          <StyledNavLink to="/weekly">
+            <StyledButton>Week</StyledButton>
           </StyledNavLink>
         </ButtonContainer>
         <StyledH2>
@@ -109,13 +107,15 @@ export default function App({ timeframe }: AppProps) {
         <StyledSection>
           <>
             <ContentContainer>
-              <SongCircles>
-                <StyledImgContainer
-                  src={songs[0]?.album_image}
-                  alt={songs[0]?.name}
-                  onClick={() => playSong(songs[0])}
-                />
-              </SongCircles>
+              <Link to={`/${timeframe}/musicplayer/${songs[0]?.id}`}>
+                <SongCircles>
+                  <StyledImgContainer
+                    src={songs[0]?.album_image}
+                    alt={songs[0]?.name}
+                    onClick={() => playSong(songs[0])}
+                  />
+                </SongCircles>
+              </Link>
               <StyledPContainer>
                 {songs[0]?.name}
                 <br></br> {songs[0]?.artist_name}
@@ -123,11 +123,13 @@ export default function App({ timeframe }: AppProps) {
             </ContentContainer>
             <ContentContainer>
               <SongCircles>
-                <StyledImgContainer
-                  src={songs[1]?.album_image}
-                  alt={songs[1]?.name}
-                  onClick={() => playSong(songs[1])}
-                />
+                <Link to={`/${timeframe}/musicplayer/${songs[1]?.id}`}>
+                  <StyledImgContainer
+                    src={songs[1]?.album_image}
+                    alt={songs[1]?.name}
+                    onClick={() => playSong(songs[1])}
+                  />
+                </Link>
               </SongCircles>
               <StyledPContainer>
                 {songs[1]?.name}
@@ -135,13 +137,15 @@ export default function App({ timeframe }: AppProps) {
               </StyledPContainer>
             </ContentContainer>
             <ContentContainer>
-              <SongCircles>
-                <StyledImgContainer
-                  src={songs[2]?.album_image}
-                  alt={songs[2]?.name}
-                  onClick={() => playSong(songs[2])}
-                />
-              </SongCircles>
+              <Link to={`/${timeframe}/musicplayer/${songs[2]?.id}`}>
+                <SongCircles>
+                  <StyledImgContainer
+                    src={songs[2]?.album_image}
+                    alt={songs[2]?.name}
+                    onClick={() => playSong(songs[2])}
+                  />
+                </SongCircles>
+              </Link>
               <StyledPContainer>
                 {songs[2]?.name}
                 <br></br> {songs[2]?.artist_name}
@@ -172,12 +176,6 @@ export default function App({ timeframe }: AppProps) {
                 </div>
               </>
             )}
-
-            <AudioDisplay
-              ref={audioRef}
-              controls
-              style={{ display: currentlyPlaying ? "block" : "none" }}
-            ></AudioDisplay>
           </ContentContainer>
         </StyledSection>
       </ContentContainer>
