@@ -26,12 +26,5 @@ const StyledPContainer = styled.p`
     margin-top: 9px;
     margin-bottom: 9px;
   }
-
-  ${mediaQueries.desktop} {
-    font-size: 20px;
-    max-width: 200px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-  }
 `;
 export default StyledPContainer;

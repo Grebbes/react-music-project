@@ -131,7 +131,7 @@ export default function App() {
                 textAlign: "center",
                 color: "whitesmoke",
                 textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
-                paddingBottom: "50px",
+                paddingBottom: "20px",
               }}
             >
               <h3>Ready to Play</h3>

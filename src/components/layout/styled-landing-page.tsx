@@ -25,11 +25,6 @@ const StyledLandingPage = styled.div`
     gap: 18px;
     padding: 18px;
   }
-
-  ${mediaQueries.desktop} {
-    gap: 25px;
-    padding: 25px;
-  }
 `;
 
 export default StyledLandingPage;

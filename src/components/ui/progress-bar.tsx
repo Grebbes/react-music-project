@@ -40,17 +40,6 @@ const MusicBar = styled.input`
       border: 7px solid #fff;
     }
   }
-
-  ${mediaQueries.desktop} {
-    height: 8px;
-    margin: 50px;
-
-    &::-webkit-slider-thumb {
-      width: 24px;
-      height: 24px;
-      border: 10px solid #fff;
-    }
-  }
 `;
 
 export default MusicBar;

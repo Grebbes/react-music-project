@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { mediaQueries } from "../../styles/media-queries";
 
 const ButtonContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 25px;
   display: flex;
   gap: 50px;
   justify-content: center;
@@ -18,12 +18,6 @@ const ButtonContainer = styled.div`
     flex-direction: column;
     gap: 20px;
     margin-top: 40px;
-  }
-
-  ${mediaQueries.desktop} {
-    flex-direction: row;
-    gap: 60px;
-    margin-top: 60px;
   }
 `;
 

@@ -28,13 +28,6 @@ const StyledControlls = styled.div`
     margin: 18px;
     font-size: 16px;
   }
-
-  ${mediaQueries.desktop} {
-    width: 70px;
-    height: 70px;
-    margin: 25px;
-    font-size: 18px;
-  }
 `;
 
 export default StyledControlls;

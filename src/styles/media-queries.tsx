@@ -8,5 +8,4 @@ export const breakpoints = {
 export const mediaQueries = {
   mobile: `@media (max-width: ${breakpoints.mobile})`,
   tablet: `@media (min-width: 577px) and (max-width: ${breakpoints.tablet})`,
-  desktop: `@media (min-width: ${breakpoints.desktop})`,
 };

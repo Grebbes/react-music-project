@@ -3,8 +3,8 @@ import { mediaQueries } from "../../styles/media-queries";
 
 const StyledSection = styled.section`
   display: flex;
-  gap: 100px;
-  margin-top: 30px;
+  gap: 80px;
+  margin-top: 20px;
   justify-content: center;
   align-items: center;
 
@@ -18,12 +18,6 @@ const StyledSection = styled.section`
     flex-direction: column;
     gap: 40px;
     margin-top: 25px;
-  }
-
-  ${mediaQueries.desktop} {
-    flex-direction: row;
-    gap: 120px;
-    margin-top: 40px;
   }
 `;
 

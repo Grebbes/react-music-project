@@ -18,11 +18,6 @@ const ContentContainer = styled.div`
     gap: 1rem;
     max-width: 350px;
   }
-
-  ${mediaQueries.desktop} {
-    gap: 1.5rem;
-    max-width: 450px;
-  }
 `;
 
 export default ContentContainer;

@@ -31,12 +31,6 @@ const SongCircles = styled.div`
     width: 150px;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.35);
   }
-
-  ${mediaQueries.desktop} {
-    height: 200px;
-    width: 200px;
-    box-shadow: 0 12px 15px rgba(0, 0, 0, 0.45);
-  }
 `;
 
 export default SongCircles;

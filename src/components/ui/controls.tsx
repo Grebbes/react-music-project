@@ -18,12 +18,6 @@ const Controls = styled.div`
       transform: scale(1.1);
     }
   }
-
-  ${mediaQueries.desktop} {
-    :nth-child(2) {
-      transform: scale(1.3);
-    }
-  }
 `;
 
 export default Controls;

@@ -34,13 +34,6 @@ const StyledButton = styled.button`
     width: 160px;
     min-width: 160px;
   }
-
-  ${mediaQueries.desktop} {
-    padding: 14px 45px;
-    font-size: 18px;
-    width: auto;
-    min-width: auto;
-  }
 `;
 
 export default StyledButton;
