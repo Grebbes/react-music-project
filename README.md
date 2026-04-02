@@ -1,13 +1,13 @@
 # React Musikstatistik App
 
-En React TypeScript-applikation som visar populära låtar och musikstatistik baserat på olika tidsramar (veckovis, månadsvis och totalt).
+En React TypeScript-appen som visar populära låtar och musikstatistik baserat på olika tidsramar (veckovis, månadsvis och totalt).
 
 ## 📖 Projektbeskrivning
 
-Denna applikation låter användare utforska musikstatistik genom ett interaktivt gränssnitt. Användare kan:
+Denna appen låter användare utforska musikstatistik genom ett interaktivt gränssnitt. Användare kan:
 
 - Visa populära låtar för olika tidsperioder (veckovis, månadsvis, totalt)
-- Lyssna på låtarna direkt i applikationen
+- Lyssna på låtarna direkt i webappen
 - Navigera mellan olika vyer med React Router
 
 ## 🛠️ Teknikstack
@@ -44,7 +44,7 @@ Starta utvecklingsservern:
 npm run dev
 ```
 
-Applikationen öppnas automatiskt i din webbläsare på `http://localhost:5173`
+Webappen öppnas automatiskt i din webbläsare på `http://localhost:5173`
 
 ## 🎵 Funktioner
 
