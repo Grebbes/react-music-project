@@ -13,6 +13,7 @@ import ContentContainer from "./components/layout/contentcontainer";
 import { GlobalStyles } from "./components/layout/globalstyles";
 import IconCircle from "./components/layout/icon-circle";
 import StyledSection from "./components/layout/stylecsection";
+import StyledH1 from "./components/layout/styled-h1";
 import StyledH2 from "./components/layout/styled-h2";
 import StyledPContainer from "./components/layout/styled-p-container";
 import StyledMain from "./components/layout/styledmain";
@@ -58,17 +59,7 @@ export default function App() {
             <StyledImgContainer src={playerImage} alt="Music Player" />
           </IconCircle>
         </div>
-        <h1
-          style={{
-            color: "white",
-            textShadow: "2px 2px 6px rgba(0, 0, 0, 0.7)",
-            fontSize: "2.5rem",
-            fontWeight: "bold",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Top Songs from Jamedon
-        </h1>
+        <StyledH1>Top Songs from Jamedon</StyledH1>
         <ButtonContainer>
           <StyledNavLink to="/overall">
             <StyledButton>Overall</StyledButton>
@@ -140,6 +131,7 @@ export default function App() {
                 textAlign: "center",
                 color: "whitesmoke",
                 textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+                paddingBottom: "50px",
               }}
             >
               <h3>Ready to Play</h3>

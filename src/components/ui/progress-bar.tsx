@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mediaQueries } from "../../styles/media-queries";
 
 const MusicBar = styled.input`
   -webkit-appearance: none;
@@ -8,6 +9,7 @@ const MusicBar = styled.input`
   border-radius: 4px;
   cursor: pointer;
   margin: 40px;
+
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     background: #f53192;
@@ -15,6 +17,39 @@ const MusicBar = styled.input`
     height: 20px;
     border-radius: 50%;
     border: 8px solid #fff;
+  }
+
+  ${mediaQueries.mobile} {
+    height: 4px;
+    margin: 20px;
+
+    &::-webkit-slider-thumb {
+      width: 16px;
+      height: 16px;
+      border: 6px solid #fff;
+    }
+  }
+
+  ${mediaQueries.tablet} {
+    height: 5px;
+    margin: 30px;
+
+    &::-webkit-slider-thumb {
+      width: 18px;
+      height: 18px;
+      border: 7px solid #fff;
+    }
+  }
+
+  ${mediaQueries.desktop} {
+    height: 8px;
+    margin: 50px;
+
+    &::-webkit-slider-thumb {
+      width: 24px;
+      height: 24px;
+      border: 10px solid #fff;
+    }
   }
 `;
 

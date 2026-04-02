@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mediaQueries } from "../../styles/media-queries";
 
 const StyledControlls = styled.div`
   width: 60px;
@@ -12,6 +13,28 @@ const StyledControlls = styled.div`
   color: #f53192;
   box-shadow: 0 2px 2px rgba(255, 26, 26, 0.22);
   cursor: pointer;
+  transition: all 0.2s ease;
+
+  ${mediaQueries.mobile} {
+    width: 50px;
+    height: 50px;
+    margin: 15px;
+    font-size: 14px;
+  }
+
+  ${mediaQueries.tablet} {
+    width: 55px;
+    height: 55px;
+    margin: 18px;
+    font-size: 16px;
+  }
+
+  ${mediaQueries.desktop} {
+    width: 70px;
+    height: 70px;
+    margin: 25px;
+    font-size: 18px;
+  }
 `;
 
 export default StyledControlls;
