@@ -64,6 +64,10 @@ Webappen öppnas automatiskt i din webbläsare på `http://localhost:5173`
 
 - [x] **README.md:** Projektmappen innehåller en README.md fil
 
+- [x] **Lämnas in i tid:** Uppgiften lämnas in i tid!
+
+- [x] **Presentation är genomförd:** Muntlig presentation är genomförd
+
 ### Krav för väl godkänt:
 
 - [x] **Alla godkänt-punkter:** Alla punkter för godkänt är uppfyllda
