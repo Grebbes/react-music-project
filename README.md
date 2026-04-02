@@ -1,6 +1,8 @@
 # React Musikstatistik App
 
-En React TypeScript-appen som visar populära låtar och musikstatistik baserat på olika tidsramar (veckovis, månadsvis och totalt).
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=vercel)](https://react-music-project-mu.vercel.app/)
+
+En React TypeScript-app som visar populära låtar och musikstatistik baserat på olika tidsramar (veckovis, månadsvis och totalt).
 
 ## 📖 Projektbeskrivning
 
