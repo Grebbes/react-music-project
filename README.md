@@ -48,10 +48,8 @@ Applikationen öppnas automatiskt i din webbläsare på `http://localhost:5173`
 
 ## 🎵 Funktioner
 
-- Ljuduppspelning av låtar
-- Dynamisk laddning av musikdata
-- Modern och ren användargränssnitt
-- Typesäker utveckling med TypeScript
+- uppspelning av låtar
+- laddning av musikdata
 
 ## ✅ Kravspecifikation
 
@@ -68,7 +66,7 @@ Applikationen öppnas automatiskt i din webbläsare på `http://localhost:5173`
 
 ### Krav för väl godkänt:
 
-- [ ] **Alla godkänt-punkter:** Alla punkter för godkänt är uppfyllda
+- [x] **Alla godkänt-punkter:** Alla punkter för godkänt är uppfyllda
 
 - [x] **CSS i JS:** Ett "CSS i JS" lib skall användas för att skriva CSS (ex JSS, Styled-Components, mm)
 
