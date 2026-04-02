@@ -30,13 +30,8 @@ Se till att du har följande installerat:
 ### Installation
 
 1. Klona eller ladda ner projektet
-2. Navigera till projektmappen:
 
-   ```bash
-   cd react-inl
-   ```
-
-3. Installera beroenden:
+2. Installera beroenden:
    ```bash
    npm install
    ```
